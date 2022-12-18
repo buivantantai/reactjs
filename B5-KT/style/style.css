@@ -23,7 +23,7 @@ html {
     right: 0%;
     top: 0%;
     bottom: 0%;
-    background: url(/B5-KT/img/img1.jpg) top center / cover no-repeat;;
+    background: url(../img/img1.jpg) top center / cover no-repeat;;
     z-index: 0;
     width: 100%;
     filter:brightness(50%);
