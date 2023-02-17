@@ -1,5 +1,5 @@
 {
-  "name": "bt11-js",
+  "name": "b13-kt",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,5 +8,10 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "fs-extra": "^11.1.0",
+    "fs-node": "^1.0.1",
+    "readline-sync": "^1.4.10"
+  }
 }

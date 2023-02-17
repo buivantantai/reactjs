@@ -1,7 +1,7 @@
 const students = [
+    { id: "T3HXX5", firstName: "Minh", lastName: "Nguyen Nhat" },
     { id: "T3HXX1", firstName: "NgAN", lastName: "Duong Thuy" },
     { id: "T3HXX2", firstName: "Ha", lastName: "Do Thi Thu" },
-    { id: "T3HXX5", firstName: "Minh", lastName: "Nguyen Nhat" },
   ];
   
   //B27
@@ -37,6 +37,14 @@ const arrSort = [7, 0, 1, 8, 5, 9, 20, 10];
 const newSort= arrSort.sort((a, b) => b - a); //a - b : tăng dần, b - a: giảm dần
 console.log(newSort);
 
+
+const nameSort = ['Đức', 'Anh', 'Tùng', 'Hoa'];
+const newSortName = nameSort.sort((a, b) => a.localeCompare(b));
+console.log(newSortName);
+
+//B29
+const studentNameSort = studentMap.sort((a, b) => a.firstName.localeCompare(b.firstName));
+console.log(studentNameSort);
 
 
 //reduce: 
