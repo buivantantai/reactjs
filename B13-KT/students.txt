@@ -1,1 +1,1 @@
-[{Id: 1,Name: 'Bui Van Tan Tai',Age: 21},{Id: 2,Name: 'Bui Van Tan Khoa',Age: 20},{Id: 3,Name: 'Bui Van Tan Tan',Age: 19},{Id: 4,Name: 'Bui Van Tan Lan',Age: 22},]
+[{"id":"3","name":"abc","age":"40","sex":"female","score_in":"3","score_tb":"3"},{"id":"1","name":"tai","age":"22","sex":"female","score_in":"5","score_tb":"10"}]
