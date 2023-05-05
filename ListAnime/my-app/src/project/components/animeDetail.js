@@ -10,14 +10,16 @@ import AnimeCharacters from "./animeCharacters";
 import AnimeTrailer from "./animeTrailer";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Comments from "./Comment/comments";
 
 export default function AnimeDetail() {
   const params = useParams();
   const [animeLocal, setAnimeLocal] = useState();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [modalShow, setModalShow] = React.useState(false);
   const animeList = useSelector((state) => state.listAnime);
-  const dispatch = useDispatch();
+
   const [ep, setEp] = useState(0);
   const [anime, setAnime] = useState();
   const addToList = (animeData) => {
@@ -308,6 +310,9 @@ export default function AnimeDetail() {
                   </Tab>
                   <Tab eventKey="Trailer" title="Trailer">
                     <AnimeTrailer animeLocal={animeLocal} />
+                  </Tab>
+                  <Tab eventKey="Comment" title="Comment">
+                    <Comments />
                   </Tab>
                 </Tabs>
               </div>

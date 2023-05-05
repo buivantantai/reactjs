@@ -13,6 +13,7 @@ export const loginFirebase = createAsyncThunk("user/login", async (arg) => {
   );
   localStorage.setItem("token", res.data.idToken); // mục đích để khi F5 lại trang không bị mất
   localStorage.setItem("name", res.data.email);
+  localStorage.setItem("id", res.data.localId);
   return res.data;
 });
 
@@ -31,6 +32,7 @@ export const registerFirebase = createAsyncThunk(
     );
     localStorage.setItem("token", res.data.idToken); // mục đích để khi F5 lại trang không bị mất
     localStorage.setItem("name", res.data.email);
+    localStorage.setItem("id", res.data.localId);
     return res.data;
   }
 );
