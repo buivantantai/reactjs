@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/reactjs/static/css/main.999f1719.css",
+    "main.js": "/reactjs/static/js/main.c81f0f47.js",
+    "static/media/MyAnimeList-login-icon.png": "/reactjs/static/media/MyAnimeList-login-icon.bb3ac3c65ce41702b15f.png",
+    "static/media/not_found.png": "/reactjs/static/media/not_found.51b68f58355c0a6ef404.png",
+    "index.html": "/reactjs/index.html",
+    "main.999f1719.css.map": "/reactjs/static/css/main.999f1719.css.map",
+    "main.c81f0f47.js.map": "/reactjs/static/js/main.c81f0f47.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.999f1719.css",
+    "static/js/main.c81f0f47.js"
+  ]
+}
