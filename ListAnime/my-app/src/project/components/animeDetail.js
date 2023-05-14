@@ -312,7 +312,19 @@ export default function AnimeDetail() {
                     <AnimeTrailer animeLocal={animeLocal} />
                   </Tab>
                   <Tab eventKey="Comment" title="Comment">
-                    <Comments />
+                    {localStorage.getItem("token") ? (
+                      <Comments />
+                    ) : (
+                      <div>
+                        <p style={{ color: "white" }}>
+                          Please{" "}
+                          <a href="/login" style={{ textDecoration: "none" }}>
+                            Login
+                          </a>{" "}
+                          to comment
+                        </p>
+                      </div>
+                    )}
                   </Tab>
                 </Tabs>
               </div>

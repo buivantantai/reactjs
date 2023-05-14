@@ -57,6 +57,18 @@ export const userSlice = createSlice({
       .addCase(loginFirebase.rejected, (state, action) => {
         state.loading = false;
         state.error = "Bị lỗi rồi";
+      })
+      .addCase(registerFirebase.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(registerFirebase.fulfilled, (state, action) => {
+        state.loading = false;
+        state.token = action.payload.idToken; // mục đích để lấy dữ gửi kèm các request khác
+        state.name = action.payload.email;
+      })
+      .addCase(registerFirebase.rejected, (state, action) => {
+        state.loading = false;
+        state.error = "Bị lỗi rồi";
       });
   },
 });

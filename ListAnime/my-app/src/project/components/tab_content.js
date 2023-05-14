@@ -143,7 +143,7 @@ export default function Tab_content({ seasons }) {
                   className="card_img"
                   variant="top"
                   src={animeSeasonNow["data"][item].images.jpg.image_url}
-                  style={{ height: "230px" }}
+                  style={{ height: "auto" }}
                   onClick={() => {
                     gotoDetail(
                       animeSeasonNow["data"][item].mal_id,

@@ -592,7 +592,9 @@ p.meta_dd span {
   padding-top: 16px;
 }
 .lazyloaded {
-  width: auto;
+  width: 100%;
+  height: auto;
+  display: block;
 }
 .list-block {
   margin-top: 16px;
@@ -844,5 +846,49 @@ p.meta_dd span {
     width: 100%;
     margin-left: 0px;
     margin-right: 0px;
+  }
+}
+
+@media only screen and (max-width: 1399px) {
+  .tab-content-list div.card {
+    width: 189px !important;
+  }
+  .header {
+    width: 65%;
+  }
+  .list-container {
+    width: 65%;
+  }
+}
+@media only screen and (max-width: 1199px) {
+  .tab-content-list div.card {
+    width: 199px !important;
+  }
+  .header {
+    width: 75%;
+  }
+  .list-container {
+    width: 75%;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .tab-content-list div.card {
+    width: 224px !important;
+  }
+}
+@media only screen and (max-width: 750px) {
+  .header {
+    width: 90%;
+  }
+  .list-container {
+    width: 90%;
+  }
+}
+@media only screen and (max-width: 550px) {
+  .header {
+    width: 95%;
+  }
+  .list-container {
+    width: 95%;
   }
 }

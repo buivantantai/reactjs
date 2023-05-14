@@ -57,11 +57,17 @@ const commentSlice = createSlice({
     filterCommentParent: (state, action) => {
       // lọc tất cả những anime đang xem
       const converData = JSON.parse(JSON.stringify(state));
-      const DataFilter = Object.keys(converData.data).filter(
-        (i) =>
-          converData.data[i].parentId == null &&
-          converData.data[i].mal_id == action.payload
-      );
+      const DataFilter = Object.keys(converData.data)
+        .filter(
+          (i) =>
+            converData.data[i].parentId == null &&
+            converData.data[i].mal_id == action.payload
+        )
+        .sort(
+          (a, b) =>
+            new Date(converData.data[b].createdAt).getTime() -
+            new Date(converData.data[a].createdAt).getTime()
+        );
       state.dataFilter = DataFilter;
     },
   },

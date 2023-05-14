@@ -353,7 +353,7 @@ export default function SearchAnimeByNameChangePage() {
                           className="card_img"
                           variant="top"
                           src={animeLocal["data"][item].images.jpg.image_url}
-                          style={{ height: "230px" }}
+                          style={{ height: "auto" }}
                           onClick={() => {
                             gotoDetail(
                               animeLocal["data"][item].mal_id,
