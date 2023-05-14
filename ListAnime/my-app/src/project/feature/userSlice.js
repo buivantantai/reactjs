@@ -41,6 +41,7 @@ export const userSlice = createSlice({
   initialState: {
     name: "",
     token: localStorage.getItem("token"),
+    id: localStorage.getItem("id"),
   },
   //   list action trong reducers
   reducers: {},

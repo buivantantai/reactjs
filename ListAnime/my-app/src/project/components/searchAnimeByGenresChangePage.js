@@ -375,6 +375,7 @@ export default function SearchAnimeByGenresChangePage() {
                           </Card.Title>
                         </Card.Body>
                         {animeList.doneGet &&
+                        animeList.data &&
                         Object.keys(animeList.data).filter(
                           (index) =>
                             animeList.data[index].mal_id ==

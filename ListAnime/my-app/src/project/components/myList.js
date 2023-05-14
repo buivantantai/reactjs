@@ -7,6 +7,7 @@ import MyListWatching from "./myListWatching";
 import MyListCompleted from "./myListCompleted";
 import MyListDropped from "./myListDropped";
 import { getListAnime } from "../feature/listAnimeSlice";
+import notFound from "../../assets/img/not_found.png";
 
 export default function MyList() {
   const dispatch = useDispatch();
@@ -33,7 +34,7 @@ export default function MyList() {
             <img className="lazyloaded" src={logo}></img>
           </div>
         </div>
-        {animeList.doneGet && (
+        {animeList.doneGet && animeList.data ? (
           <Tabs
             defaultActiveKey="All"
             id="justify-tab-example"
@@ -53,6 +54,12 @@ export default function MyList() {
               <MyListDropped></MyListDropped>
             </Tab>
           </Tabs>
+        ) : (
+          <div className="not_found">
+            Nothing Here
+            <br />
+            <img src={notFound}></img>
+          </div>
         )}
       </div>
       <footer>

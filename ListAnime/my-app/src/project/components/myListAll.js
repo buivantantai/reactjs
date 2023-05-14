@@ -148,6 +148,7 @@ export default function MyListAll({ animeList }) {
             </tr>
           </tbody>
           {animeList.doneGet &&
+            animeList.data &&
             Object.keys(animeList.data).map((item, index) => {
               return (
                 <tbody className="list-item" key={item}>

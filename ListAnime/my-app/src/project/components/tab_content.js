@@ -164,6 +164,7 @@ export default function Tab_content({ seasons }) {
                     {animeSeasonNow["data"][item].titles[0].title}
                   </Card.Title>
                   {animeList.doneGet &&
+                  animeList.data &&
                   // animeListLocal.mal_id == animeSeasonNow["data"][item].mal_id
                   Object.keys(animeList.data).filter(
                     (index) =>

@@ -55,7 +55,6 @@ const commentSlice = createSlice({
   initialState,
   reducers: {
     filterCommentParent: (state, action) => {
-      // lọc tất cả những anime đang xem
       const converData = JSON.parse(JSON.stringify(state));
       const DataFilter = Object.keys(converData.data)
         .filter(

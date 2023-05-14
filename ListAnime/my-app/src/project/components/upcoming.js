@@ -156,6 +156,7 @@ export default function Upcoming() {
                     {animeUpcoming["data"][item].titles[0].title}
                   </Card.Title>
                   {animeList.doneGet &&
+                  animeList.data &&
                   Object.keys(animeList.data).filter(
                     (index) =>
                       animeList.data[index].mal_id ==

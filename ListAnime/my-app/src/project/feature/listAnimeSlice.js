@@ -19,9 +19,9 @@ export const getListAnime = createAsyncThunk(
   "anime/getList",
   async (arg, thunkApi) => {
     const res = await axios.get(
-      `https://animelist-33c2b-default-rtdb.firebaseio.com/list.json?auth=${
-        thunkApi.getState()?.userReducer?.token
-      }`
+      `https://animelist-33c2b-default-rtdb.firebaseio.com/list/${
+        thunkApi.getState()?.userReducer?.id
+      }.json?auth=${thunkApi.getState()?.userReducer?.token}`
     );
     return res.data;
   }
@@ -30,9 +30,9 @@ export const addListAnime = createAsyncThunk(
   "anime/addList",
   async (arg, thunkApi) => {
     const res = await axios.post(
-      `https://animelist-33c2b-default-rtdb.firebaseio.com/list.json?auth=${
-        thunkApi.getState()?.userReducer?.token
-      }`,
+      `https://animelist-33c2b-default-rtdb.firebaseio.com/list/${
+        thunkApi.getState()?.userReducer?.id
+      }.json?auth=${thunkApi.getState()?.userReducer?.token}`,
       arg
     );
     thunkApi.dispatch(getListAnime());
@@ -45,8 +45,8 @@ export const editListAnime = createAsyncThunk(
     const converData = JSON.parse(JSON.stringify(arg.data));
     const res = await axios.patch(
       `https://animelist-33c2b-default-rtdb.firebaseio.com/list/${
-        arg.id
-      }.json?auth=${thunkApi.getState()?.userReducer?.token}`,
+        thunkApi.getState()?.userReducer?.id
+      }/${arg.id}.json?auth=${thunkApi.getState()?.userReducer?.token}`,
       converData
     );
     thunkApi.dispatch(getListAnime());
@@ -57,9 +57,9 @@ export const deleteListAnime = createAsyncThunk(
   "anime/deleteList",
   async (arg, thunkApi) => {
     const res = await axios.delete(
-      `https://animelist-33c2b-default-rtdb.firebaseio.com/list/${arg}.json?auth=${
-        thunkApi.getState()?.userReducer?.token
-      }`
+      `https://animelist-33c2b-default-rtdb.firebaseio.com/list/${
+        thunkApi.getState()?.userReducer?.id
+      }/${arg}.json?auth=${thunkApi.getState()?.userReducer?.token}`
     );
     setTimeout(() => {
       thunkApi.dispatch(getListAnime());
