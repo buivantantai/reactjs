@@ -353,7 +353,7 @@ export default function SearchAnimeByGenresChangePage() {
                           className="card_img"
                           variant="top"
                           src={animeLocal["data"][item].images.jpg.image_url}
-                          style={{ height: "auto" }}
+                          style={{ height: "280px" }}
                           onClick={() => {
                             gotoDetail(
                               animeLocal["data"][item].mal_id,

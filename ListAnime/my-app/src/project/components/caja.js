@@ -62,6 +62,7 @@ export default function Caja() {
                   onClick={() => {
                     localStorage.removeItem("token", null);
                     localStorage.removeItem("name", null);
+                    localStorage.removeItem("id", null);
                   }}
                 >
                   Logout
