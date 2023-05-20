@@ -858,7 +858,6 @@ p.meta_dd span {
 @media only screen and (max-width: 1399px) {
   .tab-content-list div.card {
     width: 189px !important;
-    height: 267px !important;
   }
   .tab-content-list div.card .card_img {
     height: 267px !important;
