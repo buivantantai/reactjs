@@ -374,7 +374,7 @@ export default function searchNameByGenres() {
                           className="card_img"
                           variant="top"
                           src={animeLocal["data"][item].images.jpg.image_url}
-                          style={{ height: "280px" }}
+                          style={{ height: "255px" }}
                           onClick={() => {
                             gotoDetail(
                               animeLocal["data"][item].mal_id,

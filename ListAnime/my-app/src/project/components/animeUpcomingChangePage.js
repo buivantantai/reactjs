@@ -246,7 +246,7 @@ export default function AnimeUpcomingChangePage() {
                           className="card_img"
                           variant="top"
                           src={animeLocal["data"][item].images.jpg.image_url}
-                          style={{ height: "280px" }}
+                          style={{ height: "255px" }}
                         />
                         <Card.Body>
                           <Card.Title className="title_card">

@@ -158,7 +158,7 @@ export default function Upcoming() {
                   className="card_img"
                   variant="top"
                   src={animeUpcoming["data"][item].images.jpg.image_url}
-                  style={{ height: "280px" }}
+                  style={{ height: "255px" }}
                   onClick={() => {
                     gotoDetail(
                       animeUpcoming["data"][item].mal_id,
