@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Card, Button, Pagination, Modal, Form } from "react-bootstrap";
+import {
+  Card,
+  Button,
+  Pagination,
+  Modal,
+  Form,
+  OverlayTrigger,
+  Tooltip,
+} from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { editListAnime, deleteListAnime } from "../feature/listAnimeSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,7 +15,10 @@ import { useDispatch, useSelector } from "react-redux";
 export default function MyListAll({ animeList }) {
   const navigate = useNavigate();
   const [modalShow, setModalShow] = React.useState(false);
+  const handleClose = () => setShow(false);
+  const [show, setShow] = useState(false);
   const dispatch = useDispatch();
+  const [id, setId] = useState();
   const [ep, setEp] = useState(0);
   const [idAnime, setIdAnime] = useState();
   const [anime, setAnime] = useState();
@@ -23,6 +34,11 @@ export default function MyListAll({ animeList }) {
   const refresh = () => {
     window.location.reload();
   };
+  const renderTooltip = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      The episode you setted is incorrect!
+    </Tooltip>
+  );
   function MyVerticallyCenteredModal(props) {
     return (
       <Modal
@@ -94,21 +110,36 @@ export default function MyListAll({ animeList }) {
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button
-            onClick={() => {
-              let e = add_anime_status.value;
-              const dataEdit = {
-                id: idAnime,
-                data: {
-                  episodes_watched: parseInt(ep),
-                  status_watched: e,
-                },
-              };
-              editToList(dataEdit);
-            }}
-          >
-            Update
-          </Button>
+          {ep <= anime.episodes && ep >= 0 ? (
+            <Button
+              onClick={() => {
+                let e = add_anime_status.value;
+                if (parseInt(ep) == anime.episodes) {
+                  e = "Completed";
+                }
+                const dataEdit = {
+                  id: idAnime,
+                  data: {
+                    episodes_watched: parseInt(ep),
+                    status_watched: e,
+                  },
+                };
+                editToList(dataEdit);
+                setModalShow(false);
+              }}
+            >
+              Update
+            </Button>
+          ) : (
+            <OverlayTrigger
+              placement="left"
+              delay={{ show: 250, hide: 400 }}
+              overlay={renderTooltip}
+            >
+              <Button>Update</Button>
+            </OverlayTrigger>
+          )}
+
           <Button onClick={props.onHide}>Close</Button>
         </Modal.Footer>
       </Modal>
@@ -204,16 +235,25 @@ export default function MyListAll({ animeList }) {
                     <td className="data type">TV</td>
                     <td className="data progresss">
                       <span>
-                        <a>{animeList.data[item].episodes_watched} / </a>
+                        <a style={{ color: "#0080FF" }}>
+                          {animeList.data[item].episodes_watched}{" "}
+                        </a>
                       </span>
-                      <span>{animeList.data[item].episodes} </span>
+                      <span>
+                        {" "}
+                        /{" "}
+                        {animeList.data[item].episodes
+                          ? animeList.data[item].episodes
+                          : "-"}{" "}
+                      </span>
                     </td>
                     <td className="data remove">
                       <a
                         className="remove"
                         style={{ textDecoration: "none", cursor: "pointer" }}
                         onClick={() => {
-                          deleteFromList(item);
+                          setId(item);
+                          setShow(true);
                         }}
                       >
                         x
@@ -225,6 +265,28 @@ export default function MyListAll({ animeList }) {
             })}
         </table>
       </div>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Delete Confirm</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Are you sure you want to remove this anime from your list?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button
+            variant="primary"
+            onClick={() => {
+              deleteFromList(id);
+              setShow(false);
+            }}
+          >
+            Yes
+          </Button>
+        </Modal.Footer>
+      </Modal>
       {anime ? (
         <MyVerticallyCenteredModal
           show={modalShow}

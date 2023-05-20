@@ -22,7 +22,7 @@ export default function Comment({
   const commentList = useSelector((state) => state.listComment);
   const canReply = currentUserId;
   const replyId = parentId ? parentId : commentId;
-  const canDelete = currentUserId == comment.userId && replies.length === 0;
+  const canDelete = currentUserId == comment.userId;
   const getReplies = (commentId) =>
     Object.keys(commentList.data)
       .filter((i) => commentList.data[i].parentId == commentId)

@@ -1,20 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Caja from "./caja";
 import Bgheader from "./bgheader";
 import Footer from "./footer";
 import { loginFirebase } from "../feature/userSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import logo from "../../assets/img/MyAnimeList-login-icon.png";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const refresh = () => {
     window.location.reload();
   };
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setError(null);
+      localStorage.removeItem("status");
+      navigate("/");
+    } else {
+      if (localStorage.getItem("status")) {
+        setError("Login Failed");
+        localStorage.removeItem("status");
+      }
+    }
+  }, []);
   return (
     <div style={{ backgroundColor: "#0f0f0f" }}>
       <div className="Header">
@@ -34,7 +47,12 @@ export default function Login() {
           style={{ textAlign: "start", marginBottom: "222px" }}
         >
           <div className="box-item">
-            <h1>Đăng Nhập Vào MyListAnime</h1>
+            <h1>Sign In To MyListAnime</h1>
+            {error ? (
+              <h4 style={{ color: "red" }}>
+                <strong>{error}</strong>
+              </h4>
+            ) : null}
             <div className="peliculas">
               <Form
                 style={{ marginRight: "130px" }}
@@ -46,7 +64,7 @@ export default function Login() {
                         password: password,
                       })
                     );
-                    navigate("/");
+                    localStorage.setItem("status", "loading");
                     setTimeout(() => {
                       refresh();
                     }, 2000);
@@ -86,13 +104,13 @@ export default function Login() {
                         password: password,
                       })
                     );
-                    navigate("/");
+                    localStorage.setItem("status", "loading");
                     setTimeout(() => {
                       refresh();
                     }, 2000);
                   }}
                 >
-                  Login
+                  Sign In
                 </Button>
               </Form>
               <div className="clear"></div>

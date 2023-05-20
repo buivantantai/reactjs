@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Caja from "./caja";
 import Bgheader from "./bgheader";
 import Footer from "./footer";
@@ -11,11 +11,26 @@ import logo from "../../assets/img/MyAnimeList-login-icon.png";
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const refresh = () => {
     window.location.reload();
   };
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setError(null);
+      localStorage.removeItem("status");
+      navigate("/");
+    } else {
+      if (localStorage.getItem("status")) {
+        setError(
+          "Registration failed. Please enter correct Email and Password must be more than 6 characters"
+        );
+        localStorage.removeItem("status");
+      }
+    }
+  }, []);
   return (
     <div style={{ backgroundColor: "#0f0f0f" }}>
       <div className="Header">
@@ -35,7 +50,12 @@ export default function Register() {
           style={{ textAlign: "start", marginBottom: "222px" }}
         >
           <div className="box-item">
-            <h1>Đăng Ký Tài Khoản MyListAnime</h1>
+            <h1>Register For An Account MyListAnime</h1>
+            {error ? (
+              <h4 style={{ color: "red" }}>
+                <strong>{error}</strong>
+              </h4>
+            ) : null}
             <div className="peliculas">
               <Form
                 style={{ marginRight: "130px" }}
@@ -47,7 +67,7 @@ export default function Register() {
                         password: password,
                       })
                     );
-                    navigate("/");
+                    localStorage.setItem("status", "loading");
                     setTimeout(() => {
                       refresh();
                     }, 2000);
@@ -80,7 +100,6 @@ export default function Register() {
 
                 <Button
                   variant="primary"
-                  type="submit"
                   className="btn-submit"
                   onClick={() => {
                     dispatch(
@@ -89,7 +108,7 @@ export default function Register() {
                         password: password,
                       })
                     );
-                    navigate("/");
+                    localStorage.setItem("status", "loading");
                     setTimeout(() => {
                       refresh();
                     }, 2000);

@@ -102,7 +102,7 @@ export default function Bgheader() {
                               <Dropdown.Item
                                 key={item}
                                 className="bg-dark nav-link"
-                                style={{ textAlign: "center" }}
+                                style={{ textAlign: "center", color: "white" }}
                                 onClick={() => {
                                   searchByYear(yearSelect, item);
                                 }}

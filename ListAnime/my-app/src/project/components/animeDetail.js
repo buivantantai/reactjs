@@ -2,7 +2,16 @@ import React, { useEffect, useState } from "react";
 import Caja from "./caja";
 import Bgheader from "./bgheader";
 import Footer from "./footer";
-import { Button, Badge, Tab, Tabs, Modal, Form } from "react-bootstrap";
+import {
+  Button,
+  Badge,
+  Tab,
+  Tabs,
+  Modal,
+  Form,
+  OverlayTrigger,
+  Tooltip,
+} from "react-bootstrap";
 import { getListAnime, addListAnime } from "../feature/listAnimeSlice";
 import { useDispatch, useSelector } from "react-redux";
 import AnimeSynopsis from "./animeSynopsis";
@@ -33,13 +42,17 @@ export default function AnimeDetail() {
   }, []);
 
   const getAnimeById = async (id) => {
-    const result = await axios.get(`https://api.jikan.moe/v4/anime/${id}`);
+    const result = await axios.get(`https://api.jikan.moe/v4/anime/${id}/full`);
     setAnimeLocal(result.data);
   };
   useEffect(() => {
     getAnimeById(params.id);
   }, []);
-
+  const renderTooltip = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      The episode you setted is incorrect!
+    </Tooltip>
+  );
   function MyVerticallyCenteredModal(props) {
     return (
       <Modal
@@ -111,16 +124,27 @@ export default function AnimeDetail() {
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button
-            onClick={() => {
-              let e = add_anime_status.value;
-              anime.episodes_watched = parseInt(ep);
-              anime.status_watched = e;
-              addToList(anime);
-            }}
-          >
-            Add to List
-          </Button>
+          {ep <= anime.episodes && ep >= 0 ? (
+            <Button
+              onClick={() => {
+                let e = add_anime_status.value;
+                anime.episodes_watched = parseInt(ep);
+                anime.status_watched = e;
+                addToList(anime);
+                setModalShow(false);
+              }}
+            >
+              Add to List
+            </Button>
+          ) : (
+            <OverlayTrigger
+              placement="left"
+              delay={{ show: 250, hide: 400 }}
+              overlay={renderTooltip}
+            >
+              <Button>Add to List</Button>
+            </OverlayTrigger>
+          )}
           <Button onClick={props.onHide}>Close</Button>
         </Modal.Footer>
       </Modal>
@@ -262,7 +286,8 @@ export default function AnimeDetail() {
                         </a>
                       </p>
                       <div className="meta_btn">
-                        {animeList.doneGet &&
+                        {animeList.data &&
+                        animeList.doneGet &&
                         Object.keys(animeList.data).filter(
                           (index) =>
                             animeList.data[index].mal_id ==
@@ -345,7 +370,7 @@ export default function AnimeDetail() {
                           : "Unknown"}
                       </div>
                       <div className="score-user">
-                        {animeLocal.data.score_by} users
+                        {animeLocal.data.scored_by} users
                       </div>
                     </div>
                     <div className="stats-statis">

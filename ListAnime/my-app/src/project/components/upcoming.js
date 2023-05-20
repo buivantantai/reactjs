@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Card, Button, Row, Modal, Form } from "react-bootstrap";
+import {
+  Card,
+  Button,
+  Row,
+  Modal,
+  Form,
+  OverlayTrigger,
+  Tooltip,
+} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getListAnime, addListAnime } from "../feature/listAnimeSlice";
 import { useNavigate } from "react-router-dom";
@@ -32,7 +40,11 @@ export default function Upcoming() {
   useEffect(() => {
     getAnimeUpcoming();
   }, []);
-
+  const renderTooltip = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      The episode you setted is incorrect!
+    </Tooltip>
+  );
   function MyVerticallyCenteredModal(props) {
     return (
       <Modal
@@ -104,16 +116,27 @@ export default function Upcoming() {
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button
-            onClick={() => {
-              let e = add_anime_status.value;
-              anime.episodes_watched = parseInt(ep);
-              anime.status_watched = e;
-              addToList(anime);
-            }}
-          >
-            Add to List
-          </Button>
+          {ep <= anime.episodes && ep >= 0 ? (
+            <Button
+              onClick={() => {
+                let e = add_anime_status.value;
+                anime.episodes_watched = parseInt(ep);
+                anime.status_watched = e;
+                addToList(anime);
+                setModalShow(false);
+              }}
+            >
+              Add to List
+            </Button>
+          ) : (
+            <OverlayTrigger
+              placement="left"
+              delay={{ show: 250, hide: 400 }}
+              overlay={renderTooltip}
+            >
+              <Button>Add to List</Button>
+            </OverlayTrigger>
+          )}
           <Button onClick={props.onHide}>Close</Button>
         </Modal.Footer>
       </Modal>
@@ -172,7 +195,7 @@ export default function Upcoming() {
                       onClick={() => {
                         if (localStorage.getItem("token")) {
                           setModalShow(true);
-                          setAnime(animeLocal["data"][item]);
+                          setAnime(animeUpcoming["data"][item]);
                         } else {
                           navigate("/login");
                         }
