@@ -858,6 +858,10 @@ p.meta_dd span {
 @media only screen and (max-width: 1399px) {
   .tab-content-list div.card {
     width: 189px !important;
+    height: 267px !important;
+  }
+  .tab-content-list div.card .card_img {
+    height: 267px !important;
   }
   .header {
     width: 65%;
@@ -870,6 +874,9 @@ p.meta_dd span {
   .tab-content-list div.card {
     width: 199px !important;
   }
+  .tab-content-list div.card .card_img {
+    height: 282px !important;
+  }
   .header {
     width: 75%;
   }
@@ -880,6 +887,9 @@ p.meta_dd span {
 @media only screen and (max-width: 767px) {
   .tab-content-list div.card {
     width: 224px !important;
+  }
+  .tab-content-list div.card .card_img {
+    height: 317px !important;
   }
 }
 @media only screen and (max-width: 750px) {
