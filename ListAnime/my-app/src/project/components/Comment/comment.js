@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import icon from "../../../assets/img/user-icon.png";
 import { useSelector } from "react-redux";
 import CommentForm from "./commentForm";
+
+const ReadMore = ({ children }) => {
+  const text = children;
+  const [isReadMore, setIsReadMore] = useState(true);
+  const toggleReadMore = () => {
+    setIsReadMore(!isReadMore);
+  };
+  return (
+    <p className="text">
+      {isReadMore ? text.slice(0, 150) : text}
+      {text.length >= 150 ? (
+        <span onClick={toggleReadMore} className="read-or-hide">
+          {isReadMore ? "...Read More" : " Show Less"}
+        </span>
+      ) : null}
+    </p>
+  );
+};
 
 export default function Comment({
   comment,
@@ -18,7 +36,10 @@ export default function Comment({
     activeComment &&
     activeComment.id === commentId &&
     activeComment.type === "replying";
-  const createdAt = new Date(comment.createdAt).toLocaleDateString();
+  let createdAt;
+  if (comment.createdAt) {
+    createdAt = new Date(comment.createdAt).toLocaleDateString();
+  }
   const commentList = useSelector((state) => state.listComment);
   const canReply = currentUserId;
   const replyId = parentId ? parentId : commentId;
@@ -40,7 +61,9 @@ export default function Comment({
           <div className="comment-author">{comment.userName}</div>
           <div>{createdAt}</div>
         </div>
-        <div className="comment-text">{comment.body}</div>
+        <div className="comment-text">
+          <ReadMore>{comment.body}</ReadMore>
+        </div>
         <div className="comment-actions">
           {canReply && (
             <div

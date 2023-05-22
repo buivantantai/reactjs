@@ -787,6 +787,7 @@ p.meta_dd span {
   margin-bottom: 28px;
   text-align: start;
   color: white;
+  justify-content: space-around;
 }
 
 .comment-image-container {
@@ -798,7 +799,7 @@ p.meta_dd span {
 }
 
 .comment-right-part {
-  width: 100%;
+  width: 92%;
 }
 
 .comment-content {
@@ -814,7 +815,12 @@ p.meta_dd span {
 .comment-text {
   font-size: 18px;
 }
-
+.comment-text .text {
+  word-wrap: break-word;
+}
+.read-or-hide {
+  cursor: pointer;
+}
 .comment-actions {
   display: flex;
   font-size: 12px;

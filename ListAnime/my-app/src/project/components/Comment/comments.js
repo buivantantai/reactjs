@@ -23,7 +23,9 @@ export default function Comments() {
     }
   }, []);
   useEffect(() => {
-    commentList.doneGet && dispatch(filterCommentParent(params.id));
+    setTimeout(() => {
+      commentList.doneGet && dispatch(filterCommentParent(params.id));
+    }, 1000);
   }, [commentList.doneGet === true]);
 
   const getReplies = (commentId) =>

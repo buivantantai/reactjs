@@ -315,6 +315,7 @@ export default function searchAnimeSeason() {
               <Button>Add to List</Button>
             </OverlayTrigger>
           )}
+          <Button onClick={props.onHide}>Close</Button>
         </Modal.Footer>
       </Modal>
     );
