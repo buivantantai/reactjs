@@ -27,6 +27,7 @@ export default function Footer() {
                   listStyle: "none",
                   paddingLeft: "0px",
                   marginBottom: "0px",
+                  wordWrap: "break-word",
                 }}
               >
                 <li>
