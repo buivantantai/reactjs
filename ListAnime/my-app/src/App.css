@@ -904,6 +904,9 @@ p.meta_dd span {
   .list-container {
     width: 90%;
   }
+  .tab-content-list div.card {
+    width: 220px !important;
+  }
 }
 @media only screen and (max-width: 550px) {
   .header {
@@ -911,5 +914,36 @@ p.meta_dd span {
   }
   .list-container {
     width: 95%;
+  }
+  .tab-content-list div.card {
+    width: 210px !important;
+  }
+}
+@media only screen and (max-width: 520px) {
+  .tab-content-list div.card {
+    width: 200px !important;
+  }
+  .tab-content-list div.card .card_img {
+    height: 280px !important;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .tab-content-list div.card {
+    width: 170px !important;
+  }
+  .tab-content-list div.card .card_img {
+    height: 220px !important;
+  }
+}
+@media only screen and (max-width: 479px) {
+  .owl-item div.card {
+    width: 180px !important;
+  }
+  .owl-item div.card .card_img {
+    height: 210px !important;
+  }
+  .owl-item div.card .imbd {
+    bottom: 51px !important;
+    top: 185px !important;
   }
 }

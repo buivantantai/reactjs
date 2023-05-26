@@ -340,8 +340,8 @@ export default function AnimeDetail() {
                     {localStorage.getItem("token") ? (
                       <Comments />
                     ) : (
-                      <div>
-                        <p style={{ color: "white" }}>
+                      <div style={{ marginBottom: "50px", marginTop: "50px" }}>
+                        <p style={{ color: "white", fontSize: "20px" }}>
                           Please{" "}
                           <a href="/login" style={{ textDecoration: "none" }}>
                             Login

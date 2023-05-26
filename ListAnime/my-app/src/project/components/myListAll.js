@@ -74,6 +74,7 @@ export default function MyListAll({ animeList }) {
                       id="add_anime_status"
                       name="add_anime[status]"
                       className="inputtext"
+                      value={anime.status_watched}
                     >
                       <option value="Watching">Watching</option>
                       <option value="Completed">Completed</option>

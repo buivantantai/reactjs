@@ -12,8 +12,17 @@ import {
 import { useNavigate } from "react-router-dom";
 import { getListAnime, addListAnime } from "../feature/listAnimeSlice";
 import { useDispatch, useSelector } from "react-redux";
+import OwlCarousel from "react-owl-carousel2";
+import "react-owl-carousel2/lib/styles.css";
+import "react-owl-carousel2/src/owl.theme.default.css";
+import "react-owl-carousel2/src/owl.carousel.css";
+import PropTypes from "prop-types";
 
 export default function Silde() {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired;
   const navigate = useNavigate();
   const [animeLocal, setAnimeLocal] = useState("");
   const [modalShow, setModalShow] = React.useState(false);
@@ -27,7 +36,7 @@ export default function Silde() {
   };
   const getListAnimeHot = async () => {
     const result = await axios.get(
-      `https://api.jikan.moe/v4/top/anime?limit=7`
+      `https://api.jikan.moe/v4/top/anime?limit=9`
     );
     setAnimeLocal(result.data);
   };
@@ -142,98 +151,128 @@ export default function Silde() {
   }
 
   const options = {
-    items: 1,
-    nav: true,
     rewind: true,
     autoplay: true,
+    dots: false,
+    loop: true,
+    autoplayTimeout: 4000,
+    autoplaySpeed: 1500,
+    margin: 10,
+    responsive: {
+      0: {
+        items: 2,
+      },
+      480: {
+        items: 3,
+      },
+      750: {
+        items: 3,
+      },
+      800: {
+        items: 4,
+      },
+      950: {
+        items: 5,
+      },
+      1000: {
+        items: 6,
+      },
+      1200: {
+        items: 7,
+      },
+    },
   };
   return (
     <div>
       <Row className="row_top">
-        {animeLocal &&
-          Object.keys(animeLocal["data"]).map((item, index) => {
-            return (
-              <Card key={item} style={{ width: "130px", marginLeft: "10px" }}>
-                <Card.Img
-                  className="card_img"
-                  variant="top"
-                  src={animeLocal["data"][item].images.jpg.image_url}
-                  style={{ height: "166px" }}
-                  onClick={() => {
-                    gotoDetail(
-                      animeLocal["data"][item].mal_id,
-                      animeLocal["data"][item].title
-                    );
-                  }}
-                />
-                <Card.Body>
-                  <Card.Title
-                    className="title_card"
+        <OwlCarousel options={options}>
+          {animeLocal &&
+            Object.keys(animeLocal["data"]).map((item, index) => {
+              return (
+                <Card key={item} style={{ width: "130px" }}>
+                  <Card.Img
+                    className="card_img"
+                    variant="top"
+                    src={animeLocal["data"][item].images.jpg.image_url}
+                    style={{ height: "166px", cursor: "pointer" }}
                     onClick={() => {
                       gotoDetail(
                         animeLocal["data"][item].mal_id,
                         animeLocal["data"][item].title
                       );
                     }}
-                  >
-                    {animeLocal["data"][item].titles[0].title}
-                  </Card.Title>
-                </Card.Body>
-                {animeList.doneGet &&
-                animeList.data &&
-                Object.keys(animeList.data).filter(
-                  (index) =>
-                    animeList.data[index].mal_id ==
-                    animeLocal["data"][item].mal_id
-                ).length == 1 ? (
-                  <Button className="btn-add" size="sm">
-                    Added to Your List
-                  </Button>
-                ) : (
-                  <Button
-                    className="btn-add"
-                    size="sm"
-                    onClick={() => {
-                      if (localStorage.getItem("token")) {
-                        setModalShow(true);
-                        setAnime(animeLocal["data"][item]);
-                      } else {
-                        navigate("/login");
-                      }
-                    }}
-                  >
-                    Add to List
-                  </Button>
-                )}
-                {animeLocal["data"][item].status === "Currently Airing" ? (
-                  <span
-                    className="imbd"
-                    style={{
-                      bottom: "52px",
-                      top: "143px",
-                      left: "0",
-                    }}
-                  >
-                    {animeLocal["data"][item].episodes}/??
-                  </span>
-                ) : (
-                  <span
-                    className="imbd"
-                    style={{
-                      bottom: "52px",
-                      top: "143px",
-                      left: "0",
-                      background: "#0e7712",
-                    }}
-                  >
-                    {animeLocal["data"][item].episodes}/
-                    {animeLocal["data"][item].episodes}
-                  </span>
-                )}
-              </Card>
-            );
-          })}
+                  />
+                  <Card.Body>
+                    <Card.Title
+                      style={{ cursor: "pointer" }}
+                      className="title_card"
+                      onClick={() => {
+                        gotoDetail(
+                          animeLocal["data"][item].mal_id,
+                          animeLocal["data"][item].title
+                        );
+                      }}
+                    >
+                      {animeLocal["data"][item].titles[0].title}
+                    </Card.Title>
+                  </Card.Body>
+                  {animeList.doneGet &&
+                  animeList.data &&
+                  Object.keys(animeList.data).filter(
+                    (index) =>
+                      animeList.data[index].mal_id ==
+                      animeLocal["data"][item].mal_id
+                  ).length == 1 ? (
+                    <Button className="btn-add" size="sm">
+                      Added to Your List
+                    </Button>
+                  ) : (
+                    <Button
+                      className="btn-add"
+                      size="sm"
+                      onClick={() => {
+                        if (localStorage.getItem("token")) {
+                          setModalShow(true);
+                          setAnime(animeLocal["data"][item]);
+                        } else {
+                          navigate("/login");
+                        }
+                      }}
+                    >
+                      Add to List
+                    </Button>
+                  )}
+                  {animeLocal["data"][item].status === "Currently Airing" ? (
+                    <span
+                      className="imbd"
+                      style={{
+                        bottom: "52px",
+                        top: "143px",
+                        left: "0",
+                      }}
+                    >
+                      {animeLocal["data"][item].episodes}/??
+                    </span>
+                  ) : (
+                    <span
+                      className="imbd"
+                      style={{
+                        bottom: "52px",
+                        top: "143px",
+                        left: "0",
+                        background: "#0e7712",
+                      }}
+                    >
+                      {animeLocal["data"][item].episodes}/
+                      {animeLocal["data"][item].episodes}
+                    </span>
+                  )}
+                </Card>
+              );
+            })}
+        </OwlCarousel>
       </Row>
+
       {anime ? (
         <MyVerticallyCenteredModal
           show={modalShow}
