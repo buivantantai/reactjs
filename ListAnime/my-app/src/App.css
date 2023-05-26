@@ -814,6 +814,7 @@ p.meta_dd span {
 
 .comment-text {
   font-size: 18px;
+  margin-top: 7px;
 }
 .comment-text .text {
   word-wrap: break-word;
@@ -908,6 +909,11 @@ p.meta_dd span {
     width: 220px !important;
   }
 }
+@media only screen and (max-width: 575px) {
+  .container {
+    padding: 0 !important;
+  }
+}
 @media only screen and (max-width: 550px) {
   .header {
     width: 95%;
@@ -925,6 +931,12 @@ p.meta_dd span {
   }
   .tab-content-list div.card .card_img {
     height: 280px !important;
+  }
+  .s-left {
+    width: 100%;
+  }
+  .s-right {
+    display: none;
   }
 }
 @media only screen and (max-width: 503px) {
